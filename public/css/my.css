@@ -47,6 +47,12 @@
     cursor: pointer;
     box-shadow: 0 0 5px 4px #00eeee;
     font-weight: 700;
+    background-color: #00adcd;
+    background: -webkit-linear-gradient(left, #1d5ab4f8, #79f1fa, #1d5ab4f8);
+    background: -o-linear-gradient(left, #0072ff, #00c6ff);
+    background: -moz-linear-gradient(left, #0072ff, #00c6ff);
+    background: linear-gradient(left, #0072ff, #00c6ff);
+    /*background: -webkit-linear-gradient(left, #b32c2cf8, #e9dd39, #b32c2cf8);*/
 }
 
 .container-contact2 {
@@ -67,6 +73,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 90px 150px 90px 148px;
+    text-decoration-line: none;
 }
 
 @media (max-width: 992px) {

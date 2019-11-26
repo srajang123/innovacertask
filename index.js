@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = require('./util/database');
 const nodemailer = require('nodemailer');
-
+const flash = require('connect-flash');
 const host = ip.address();
 const port = process.env.PORT || 5000;
 
@@ -64,6 +64,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 app.get('/', (req, res, next) => {
     res.render('home', { title: 'Entry Management' });
@@ -95,7 +96,10 @@ app.post('/fetch', (req, res, next) => {
     db.execute('select * from guest where email=?', [id])
         .then(rows => {
             rows = rows[0][0];
-            res.render('out', { data: rows, title: 'CheckOut', getDetails: false });
+            if (rows == undefined) {
+                res.redirect('/checkout');
+            } else
+                res.render('out', { data: rows, title: 'CheckOut', getDetails: false });
         })
         .catch(err => { console.log(err) });
 });
