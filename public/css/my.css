@@ -6,14 +6,22 @@
     height: 250px;
     background: #e6e6e6;
     font-family: Montserrat-Bold;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.5;
     color: #666666;
     border-radius: 15px;
 }
 
+.title {
+    color: #333;
+}
+
+.value {
+    color: #002599;
+}
+
 .data-view {
-    padding-left: 25%;
+    padding-left: 18%;
     margin-bottom: 10px;
 }
 
@@ -37,12 +45,14 @@
 
 .container-contact2:hover {
     cursor: pointer;
-    box-shadow: 0 0 5px 4px #0012cd;
-    ;
+    box-shadow: 0 0 5px 4px #00eeee;
+    font-weight: 700;
 }
 
 .container-contact2 {
     /*width: 1163px;*/
+    font-size: 130%;
+    color: #002565;
     width: 30%;
     margin: 4px;
     background: #fff;
@@ -56,23 +66,25 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 150px 40px 148px;
+    padding: 90px 150px 90px 148px;
 }
 
 @media (max-width: 992px) {
     .container-contact2 {
         padding: 90px 80px 88px 90px;
+        width: 30%;
     }
 }
 
 @media (max-width: 768px) {
     .container-contact2 {
-        padding: 90px 80px 88px 80px;
+        padding: 30px 0px 30px 220px;
+        width: 80%;
     }
 }
 
 @media (max-width: 576px) {
     .container-contact2 {
-        padding: 90px 15px 88px 15px;
+        padding: 30px 0px 30px 28%;
     }
 }
