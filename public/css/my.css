@@ -1,0 +1,78 @@
+.views {
+    position: relative;
+    display: block;
+    padding-top: 5%;
+    width: 400px;
+    height: 250px;
+    background: #e6e6e6;
+    font-family: Montserrat-Bold;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+    border-radius: 15px;
+}
+
+.data-view {
+    padding-left: 25%;
+    margin-bottom: 10px;
+}
+
+.contact2 {
+    min-height: 100%;
+    width: 100%;
+    background: #009bff;
+    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+    background: -o-linear-gradient(left, #0072ff, #00c6ff);
+    background: -moz-linear-gradient(left, #0072ff, #00c6ff);
+    background: linear-gradient(left, #0072ff, #00c6ff);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-contact2:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 4px #0012cd;
+    ;
+}
+
+.container-contact2 {
+    /*width: 1163px;*/
+    width: 30%;
+    margin: 4px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 150px 40px 148px;
+}
+
+@media (max-width: 992px) {
+    .container-contact2 {
+        padding: 90px 80px 88px 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-contact2 {
+        padding: 90px 80px 88px 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-contact2 {
+        padding: 90px 15px 88px 15px;
+    }
+}
