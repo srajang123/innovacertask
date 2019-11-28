@@ -25,22 +25,22 @@
             </form>
             {{else}}
             <form class="contact1-form validate-form views" name="checkout-form" method="post" action="/checkout">
-                <input type="hidden" name="user" value="{{data.email}}">
+                <input type="hidden" name="user" value="{{data.gemail}}">
                 <span class="contact1-form-title">
 					Hope You Had Fun...
 				</span>
                 <div class="data-view">
                     <div class="view">
                         <span class="title">Name: </span>
-                        <span class="value">{{data.name}}</span>
+                        <span class="value">{{data.gname}}</span>
                     </div>
                     <div class="view">
                         <span class="title">Email: </span>
-                        <span class="value">{{data.email}}</span>
+                        <span class="value">{{data.gemail}}</span>
                     </div>
                     <div class="view">
                         <span class="title">Mobile Number: </span>
-                        <span class="value">{{data.mobile}}</span>
+                        <span class="value">{{data.gmobile}}</span>
                     </div>
                     <div class="view">
                         <span class="title">Check-In: </span>

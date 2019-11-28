@@ -68,7 +68,7 @@ app.get('/', (req, res, next) => {
     res.render('base', { title: 'Entry Management' });
 });
 app.get('/guest', (req, res, next) => {
-    db.execute('select name,email from host')
+    db.execute('select hname,hemail from host')
         .then(rows => {
             rows = rows[0];
             res.render('guest', { title: 'CheckIn', data: rows });
@@ -99,7 +99,7 @@ app.post('/checkin', (req, res, next) => {
 });
 app.post('/fetch', (req, res, next) => {
     let id = req.body.email;
-    db.execute('select * from guest where email=?', [id])
+    db.execute('select * from guest where gemail=?', [id])
         .then(rows => {
             rows = rows[0][0];
             if (rows == undefined) {
@@ -113,14 +113,14 @@ app.post('/checkout', (req, res, next) => {
     let id = req.body.user;
     let time = getTime();
     console.log(id + '\n' + time);
-    db.execute('update guest set checkout=? where email=?', [time, id])
+    db.execute('update guest set checkout=? where gemail=?', [time, id])
         .then(result => {
             console.log('Bye ' + id);
-            db.execute('select * from guest g, host h where g.email=? and g.host=h.email', [id])
+            db.execute('select * from guest g, host h where g.gemail=? and g.host=h.hemail', [id])
                 .then(rows => {
                     rows = rows[0][0];
                     console.table(rows);
-                    sendMessageGuest(rows.name, rows.email, rows.mobile, rows.checkin, rows.checkout, rows.host, rows.address);
+                    sendMessageGuest(rows.gname, rows.gemail, rows.gmobile, rows.checkin, rows.checkout, rows.hname, rows.address);
                     res.redirect('/');
                 })
                 .catch(err => { console.log(err) });
