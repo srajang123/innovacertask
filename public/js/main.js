@@ -5,7 +5,22 @@ document.querySelector('#checkout').onclick = () => {
     location.href = '/checkout';
 }
 document.querySelector('#host').onclick = () => {
-        location.href = '/host';
+    location.href = '/host';
+}
+document.querySelector('#guest').onclick = () => {
+        document.querySelector('#checkin').style.visibility = "visible";
+        document.querySelector('#checkout').style.visibility = "visible";
+        let guest = document.querySelector('#guest');
+        let host = document.querySelector('#host');
+        host.parentElement.removeChild(host);
+        guest.parentElement.removeChild(guest);
+        if (window.matchMedia('(max-width:768px)').matches) {
+            document.querySelector('#checkin').style.marginTop = "-15%";
+            document.querySelector('#checkout').style.marginTop = "-80%";
+        } else {
+            document.querySelector('#checkin').style.marginTop = "-15%";
+            document.querySelector('#checkout').style.marginTop = "-15%";
+        }
     }
     (function($) {
         "use strict";
