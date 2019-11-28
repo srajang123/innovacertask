@@ -24,7 +24,7 @@ var Mail = (mailOption) => {
         secure: true,
         auth: {
             user: 'srajan.1721cs1138@kiet.edu',
-            pass: 'princeofpersia'
+            pass: '******' //not showing password....
         }
     });
     smtpData.sendMail(mailOption, (err, res) => {
