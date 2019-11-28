@@ -192,7 +192,7 @@ iframe {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 90px 130px 88px 148px;
+    padding: 40px 130px 40px 148px;
 }
 
 
@@ -392,7 +392,7 @@ textarea.input1+.shadow-input1 {
 
 @media (max-width: 576px) {
     .container-contact1 {
-        padding: 90px 15px 88px 15px;
+        padding: 20px 15px 120px 15px;
     }
 }
 
