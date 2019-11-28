@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = require('./util/database');
 const nodemailer = require('nodemailer');
-const flash = require('connect-flash');
 const host = ip.address();
 const port = process.env.PORT || 5000;
 
@@ -25,21 +24,21 @@ var Mail = (mailOption) => {
             console.log(err);
     });
 }
-var sendMessageHost = (name, email, mob, time) => {
+var sendMessageHost = (name, email, mob, time, host) => {
     let mailOption = {
         from: 'srajan.1721cs1138@kiet.edu',
-        to: 'srajan.oel@gmail.com',
+        to: host,
         subject: 'Entry Management',
         html: '<h1>Entry Management</h1><h3>A new atendee...</h3><br><b>Name:</b>' + name + '<br><b>Phone</b>' + mob + '<br><b>E-mail:</b>' + email + '<br><b>Check-in Time:</b>' + time
     }
     Mail(mailOption);
 }
-var sendMessageGuest = (name, email, mob, enter, exit) => {
+var sendMessageGuest = (name, email, mob, enter, exit, host, addr) => {
     let mailOption = {
         from: 'srajan.1721cs1138@kiet.edu',
         to: email,
         subject: 'Entry Management',
-        html: '<h1>Entry Management</h1><h3>Thanks for attending.</h3><br><b>Name:</b>' + name + '<br><b>Phone</b>' + mob + '<br><b>Check-in Time:</b>' + enter + '<br><b>Check-out Time:</b>' + exit + '<br><b>Host Name:</b>' + 'Srajan' + '<br><b>Address Visited: </b>' + 'KIET'
+        html: '<h1>Entry Management</h1><h3>Thanks for attending.</h3><br><b>Name:</b>' + name + '<br><b>Phone</b>' + mob + '<br><b>Check-in Time:</b>' + enter + '<br><b>Check-out Time:</b>' + exit + '<br><b>Host Name:</b>' + host + '<br><b>Address Visited: </b>' + addr
     }
     Mail(mailOption);
 }
@@ -64,13 +63,19 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash());
 
 app.get('/', (req, res, next) => {
-    res.render('home', { title: 'Entry Management' });
+    res.render('base', { title: 'Entry Management' });
 });
 app.get('/guest', (req, res, next) => {
-    res.render('guest', { title: 'CheckIn' });
+    db.execute('select name,email from host')
+        .then(rows => {
+            rows = rows[0];
+            res.render('guest', { title: 'CheckIn', data: rows });
+        })
+        .catch(err => {
+            console.log(err);
+        })
 });
 app.get('/host', (req, res, next) => {
     res.render('host', { title: 'Host Information' });
@@ -80,14 +85,15 @@ app.get('/checkout', (req, res, next) => {
 })
 
 app.post('/checkin', (req, res, next) => {
+    let host = req.body.host;
     let name = req.body.name;
     let email = req.body.email;
     let mobile = req.body.mobile;
     let timestamp = getTime();
-    db.query('insert into guest values(?,?,?,?,?)', [name, email, mobile, timestamp, ''])
+    db.query('insert into guest values(?,?,?,?,?,?)', [name, email, mobile, timestamp, '', host])
         .then(out => {
             res.redirect('/');
-            sendMessageHost(name, email, mobile, timestamp);
+            sendMessageHost(name, email, mobile, timestamp, host);
         })
         .catch(err => { console.log(err) });
 });
@@ -110,14 +116,25 @@ app.post('/checkout', (req, res, next) => {
     db.execute('update guest set checkout=? where email=?', [time, id])
         .then(result => {
             console.log('Bye ' + id);
-            db.execute('select * from guest where email=?', [id])
+            db.execute('select * from guest g, host h where g.email=? and g.host=h.email', [id])
                 .then(rows => {
                     rows = rows[0][0];
-                    sendMessageGuest(rows.name, rows.email, rows.mobile, rows.checkin, rows.checkout);
+                    console.table(rows);
+                    sendMessageGuest(rows.name, rows.email, rows.mobile, rows.checkin, rows.checkout, rows.host, rows.address);
                     res.redirect('/');
                 })
                 .catch(err => { console.log(err) });
         })
         .catch(err => { console.log(err) });
+});
+app.post('/host', (req, res, next) => {
+    db.execute('insert into host values(?,?,?,?)', [req.body.name, req.body.email, req.body.mobile, req.body.address])
+        .then(out => {
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/host');
+        })
 });
 app.listen(port, host, () => { console.log('Server running on ' + host + ':' + port) });
