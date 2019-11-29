@@ -18,17 +18,17 @@
 					<span class="shadow-input1"></span>
 				</div>
 				<div class="wrap-input1 validate-input" data-validate = "Name is required">
-					<input class="input1" type="text" name="name" placeholder="Name">
+					<input class="input1" type="text" name="name" placeholder="Name" title="A valid name is required" required>
 					<span class="shadow-input1"></span>
 				</div>
 
 				<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<input class="input1" type="text" name="email" placeholder="Email">
+					<input class="input1" type="text" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Valid email is required: ex@abc.xyz" required>
 					<span class="shadow-input1"></span>
 				</div>
 
 				<div class="wrap-input1 validate-input" data-validate = "Mobile No. is required">
-					<input class="input1" type="text" name="mobile" placeholder="Mobile Number">
+					<input class="input1" type="text" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required maxlength="10" minlength="10" title="10 digit mobile number is required">
 					<span class="shadow-input1"></span>
 				</div>
 
